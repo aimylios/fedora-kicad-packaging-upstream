@@ -1,115 +1,20 @@
 Name:           kicad
-Version:        4.0.7
-Release:        3%{?dist}
+Version:        5.0.0
+Release:        1%{?dist}
 Epoch:          1
 Summary:        EDA software suite for creation of schematic diagrams and PCBs
 
-Group:          Applications/Engineering
-License:        GPLv2+
+License:        GPLv3+
 URL:            http://www.kicad-pcb.org
 
-Source:         https://launchpad.net/kicad/4.0/%{version}/+download/kicad-%{version}.tar.xz
-Source1:        https://github.com/KiCad/kicad-doc/archive/%{version}.tar.gz#/kicad-doc-%{version}.tar.gz
-Source2:        https://github.com/KiCad/kicad-library/archive/%{version}.tar.gz#/kicad-library-%{version}.tar.gz
-Source3:        https://github.com/KiCad/kicad-i18n/archive/%{version}.tar.gz#/kicad-i18n-%{version}.tar.gz
-
-# perl -ne 'BEGIN {$s=4} /uri \$\{KIGITHUB}\/([^)]*)/ and printf "%-16shttps://github.com/KiCad/$1/archive/%{version}.tar.gz#/$1-%{version}.tar.gz\n", "Source".$s++.":"' \
-# kicad-*/kicad-library-*/template/fp-lib-table.for-github
-Source4:        https://github.com/KiCad/Battery_Holders.pretty/archive/%{version}.tar.gz#/Battery_Holders.pretty-%{version}.tar.gz
-Source5:        https://github.com/KiCad/Buttons_Switches_SMD.pretty/archive/%{version}.tar.gz#/Buttons_Switches_SMD.pretty-%{version}.tar.gz
-Source6:        https://github.com/KiCad/Buttons_Switches_THT.pretty/archive/%{version}.tar.gz#/Buttons_Switches_THT.pretty-%{version}.tar.gz
-Source7:        https://github.com/KiCad/Buzzers_Beepers.pretty/archive/%{version}.tar.gz#/Buzzers_Beepers.pretty-%{version}.tar.gz
-Source8:        https://github.com/KiCad/Capacitors_SMD.pretty/archive/%{version}.tar.gz#/Capacitors_SMD.pretty-%{version}.tar.gz
-Source9:        https://github.com/KiCad/Capacitors_Tantalum_SMD.pretty/archive/%{version}.tar.gz#/Capacitors_Tantalum_SMD.pretty-%{version}.tar.gz
-Source10:       https://github.com/KiCad/Capacitors_THT.pretty/archive/%{version}.tar.gz#/Capacitors_THT.pretty-%{version}.tar.gz
-Source11:       https://github.com/KiCad/Connectors_Card.pretty/archive/%{version}.tar.gz#/Connectors_Card.pretty-%{version}.tar.gz
-Source12:       https://github.com/KiCad/Connectors_Harwin.pretty/archive/%{version}.tar.gz#/Connectors_Harwin.pretty-%{version}.tar.gz
-Source13:       https://github.com/KiCad/Connectors_HDMI.pretty/archive/%{version}.tar.gz#/Connectors_HDMI.pretty-%{version}.tar.gz
-Source14:       https://github.com/KiCad/Connectors_Hirose.pretty/archive/%{version}.tar.gz#/Connectors_Hirose.pretty-%{version}.tar.gz
-Source15:       https://github.com/KiCad/Connectors_IEC_DIN.pretty/archive/%{version}.tar.gz#/Connectors_IEC_DIN.pretty-%{version}.tar.gz
-Source16:       https://github.com/KiCad/Connectors_JAE.pretty/archive/%{version}.tar.gz#/Connectors_JAE.pretty-%{version}.tar.gz
-Source17:       https://github.com/KiCad/Connectors_JST.pretty/archive/%{version}.tar.gz#/Connectors_JST.pretty-%{version}.tar.gz
-Source18:       https://github.com/KiCad/Connectors_Mini-Universal.pretty/archive/%{version}.tar.gz#/Connectors_Mini-Universal.pretty-%{version}.tar.gz
-Source19:       https://github.com/KiCad/Connectors_Molex.pretty/archive/%{version}.tar.gz#/Connectors_Molex.pretty-%{version}.tar.gz
-Source20:       https://github.com/KiCad/Connectors_Multicomp.pretty/archive/%{version}.tar.gz#/Connectors_Multicomp.pretty-%{version}.tar.gz
-Source21:       https://github.com/KiCad/Connectors_Phoenix.pretty/archive/%{version}.tar.gz#/Connectors_Phoenix.pretty-%{version}.tar.gz
-Source22:       https://github.com/KiCad/Connectors_Samtec.pretty/archive/%{version}.tar.gz#/Connectors_Samtec.pretty-%{version}.tar.gz
-Source23:       https://github.com/KiCad/Connectors_TE-Connectivity.pretty/archive/%{version}.tar.gz#/Connectors_TE-Connectivity.pretty-%{version}.tar.gz
-Source24:       https://github.com/KiCad/Connectors_Terminal_Blocks.pretty/archive/%{version}.tar.gz#/Connectors_Terminal_Blocks.pretty-%{version}.tar.gz
-Source25:       https://github.com/KiCad/Connectors_WAGO.pretty/archive/%{version}.tar.gz#/Connectors_WAGO.pretty-%{version}.tar.gz
-Source26:       https://github.com/KiCad/Connectors_USB.pretty/archive/%{version}.tar.gz#/Connectors_USB.pretty-%{version}.tar.gz
-Source27:       https://github.com/KiCad/Connectors.pretty/archive/%{version}.tar.gz#/Connectors.pretty-%{version}.tar.gz
-Source28:       https://github.com/KiCad/Converters_DCDC_ACDC.pretty/archive/%{version}.tar.gz#/Converters_DCDC_ACDC.pretty-%{version}.tar.gz
-Source29:       https://github.com/KiCad/Crystals.pretty/archive/%{version}.tar.gz#/Crystals.pretty-%{version}.tar.gz
-Source30:       https://github.com/KiCad/Diodes_SMD.pretty/archive/%{version}.tar.gz#/Diodes_SMD.pretty-%{version}.tar.gz
-Source31:       https://github.com/KiCad/Diodes_THT.pretty/archive/%{version}.tar.gz#/Diodes_THT.pretty-%{version}.tar.gz
-Source32:       https://github.com/KiCad/Displays_7-Segment.pretty/archive/%{version}.tar.gz#/Displays_7-Segment.pretty-%{version}.tar.gz
-Source33:       https://github.com/KiCad/Displays.pretty/archive/%{version}.tar.gz#/Displays.pretty-%{version}.tar.gz
-Source34:       https://github.com/KiCad/Enclosures.pretty/archive/%{version}.tar.gz#/Enclosures.pretty-%{version}.tar.gz
-Source35:       https://github.com/KiCad/EuroBoard_Outline.pretty/archive/%{version}.tar.gz#/EuroBoard_Outline.pretty-%{version}.tar.gz
-Source36:       https://github.com/KiCad/Fiducials.pretty/archive/%{version}.tar.gz#/Fiducials.pretty-%{version}.tar.gz
-Source37:       https://github.com/KiCad/Fuse_Holders_and_Fuses.pretty/archive/%{version}.tar.gz#/Fuse_Holders_and_Fuses.pretty-%{version}.tar.gz
-Source38:       https://github.com/KiCad/Hall-Effect_Transducers_LEM.pretty/archive/%{version}.tar.gz#/Hall-Effect_Transducers_LEM.pretty-%{version}.tar.gz
-Source39:       https://github.com/KiCad/Heatsinks.pretty/archive/%{version}.tar.gz#/Heatsinks.pretty-%{version}.tar.gz
-Source40:       https://github.com/KiCad/Housings_BGA.pretty/archive/%{version}.tar.gz#/Housings_BGA.pretty-%{version}.tar.gz
-Source41:       https://github.com/KiCad/Housings_CSP.pretty/archive/%{version}.tar.gz#/Housings_CSP.pretty-%{version}.tar.gz
-Source42:       https://github.com/KiCad/Housings_DFN_QFN.pretty/archive/%{version}.tar.gz#/Housings_DFN_QFN.pretty-%{version}.tar.gz
-Source43:       https://github.com/KiCad/Housings_DIP.pretty/archive/%{version}.tar.gz#/Housings_DIP.pretty-%{version}.tar.gz
-Source44:       https://github.com/KiCad/Housings_LCC.pretty/archive/%{version}.tar.gz#/Housings_LCC.pretty-%{version}.tar.gz
-Source45:       https://github.com/KiCad/Housings_LGA.pretty/archive/%{version}.tar.gz#/Housings_LGA.pretty-%{version}.tar.gz
-Source46:       https://github.com/KiCad/Housings_PGA.pretty/archive/%{version}.tar.gz#/Housings_PGA.pretty-%{version}.tar.gz
-Source47:       https://github.com/KiCad/Housings_QFP.pretty/archive/%{version}.tar.gz#/Housings_QFP.pretty-%{version}.tar.gz
-Source48:       https://github.com/KiCad/Housings_SIP.pretty/archive/%{version}.tar.gz#/Housings_SIP.pretty-%{version}.tar.gz
-Source49:       https://github.com/KiCad/Housings_SOIC.pretty/archive/%{version}.tar.gz#/Housings_SOIC.pretty-%{version}.tar.gz
-Source50:       https://github.com/KiCad/Housings_SON.pretty/archive/%{version}.tar.gz#/Housings_SON.pretty-%{version}.tar.gz
-Source51:       https://github.com/KiCad/Housings_SSOP.pretty/archive/%{version}.tar.gz#/Housings_SSOP.pretty-%{version}.tar.gz
-Source52:       https://github.com/KiCad/Inductors_SMD.pretty/archive/%{version}.tar.gz#/Inductors_SMD.pretty-%{version}.tar.gz
-Source53:       https://github.com/KiCad/Inductors_THT.pretty/archive/%{version}.tar.gz#/Inductors_THT.pretty-%{version}.tar.gz
-Source54:       https://github.com/KiCad/IR-DirectFETs.pretty/archive/%{version}.tar.gz#/IR-DirectFETs.pretty-%{version}.tar.gz
-Source55:       https://github.com/KiCad/LEDs.pretty/archive/%{version}.tar.gz#/LEDs.pretty-%{version}.tar.gz
-Source56:       https://github.com/KiCad/Measurement_Points.pretty/archive/%{version}.tar.gz#/Measurement_Points.pretty-%{version}.tar.gz
-Source57:       https://github.com/KiCad/Measurement_Scales.pretty/archive/%{version}.tar.gz#/Measurement_Scales.pretty-%{version}.tar.gz
-Source58:       https://github.com/KiCad/Microwave.pretty/archive/%{version}.tar.gz#/Microwave.pretty-%{version}.tar.gz
-Source59:       https://github.com/KiCad/Modules.pretty/archive/%{version}.tar.gz#/Modules.pretty-%{version}.tar.gz
-Source60:       https://github.com/KiCad/Mounting_Holes.pretty/archive/%{version}.tar.gz#/Mounting_Holes.pretty-%{version}.tar.gz
-Source61:       https://github.com/KiCad/Opto-Devices.pretty/archive/%{version}.tar.gz#/Opto-Devices.pretty-%{version}.tar.gz
-Source62:       https://github.com/KiCad/Oscillators.pretty/archive/%{version}.tar.gz#/Oscillators.pretty-%{version}.tar.gz
-Source63:       https://github.com/KiCad/PFF_PSF_PSS_Leadforms.pretty/archive/%{version}.tar.gz#/PFF_PSF_PSS_Leadforms.pretty-%{version}.tar.gz
-Source64:       https://github.com/KiCad/Pin_Headers.pretty/archive/%{version}.tar.gz#/Pin_Headers.pretty-%{version}.tar.gz
-Source65:       https://github.com/KiCad/Potentiometers.pretty/archive/%{version}.tar.gz#/Potentiometers.pretty-%{version}.tar.gz
-Source66:       https://github.com/KiCad/Power_Integrations.pretty/archive/%{version}.tar.gz#/Power_Integrations.pretty-%{version}.tar.gz
-Source67:       https://github.com/KiCad/Relays_SMD.pretty/archive/%{version}.tar.gz#/Relays_SMD.pretty-%{version}.tar.gz
-Source68:       https://github.com/KiCad/Relays_THT.pretty/archive/%{version}.tar.gz#/Relays_THT.pretty-%{version}.tar.gz
-Source69:       https://github.com/KiCad/Resistors_SMD.pretty/archive/%{version}.tar.gz#/Resistors_SMD.pretty-%{version}.tar.gz
-Source70:       https://github.com/KiCad/Resistors_THT.pretty/archive/%{version}.tar.gz#/Resistors_THT.pretty-%{version}.tar.gz
-Source71:       https://github.com/KiCad/Resistors_Universal.pretty/archive/%{version}.tar.gz#/Resistors_Universal.pretty-%{version}.tar.gz
-Source72:       https://github.com/KiCad/RF_Antennas.pretty/archive/%{version}.tar.gz#/RF_Antennas.pretty-%{version}.tar.gz
-Source73:       https://github.com/KiCad/RF_Modules.pretty/archive/%{version}.tar.gz#/RF_Modules.pretty-%{version}.tar.gz
-Source74:       https://github.com/KiCad/Shielding_Cabinets.pretty/archive/%{version}.tar.gz#/Shielding_Cabinets.pretty-%{version}.tar.gz
-Source75:       https://github.com/KiCad/SMD_Packages.pretty/archive/%{version}.tar.gz#/SMD_Packages.pretty-%{version}.tar.gz
-Source76:       https://github.com/KiCad/Socket_Strips.pretty/archive/%{version}.tar.gz#/Socket_Strips.pretty-%{version}.tar.gz
-Source77:       https://github.com/KiCad/Sockets.pretty/archive/%{version}.tar.gz#/Sockets.pretty-%{version}.tar.gz
-Source78:       https://github.com/KiCad/Symbols.pretty/archive/%{version}.tar.gz#/Symbols.pretty-%{version}.tar.gz
-Source79:       https://github.com/KiCad/TerminalBlocks_Phoenix.pretty/archive/%{version}.tar.gz#/TerminalBlocks_Phoenix.pretty-%{version}.tar.gz
-Source80:       https://github.com/KiCad/TerminalBlocks_WAGO.pretty/archive/%{version}.tar.gz#/TerminalBlocks_WAGO.pretty-%{version}.tar.gz
-Source81:       https://github.com/KiCad/TO_SOT_Packages_SMD.pretty/archive/%{version}.tar.gz#/TO_SOT_Packages_SMD.pretty-%{version}.tar.gz
-Source82:       https://github.com/KiCad/TO_SOT_Packages_THT.pretty/archive/%{version}.tar.gz#/TO_SOT_Packages_THT.pretty-%{version}.tar.gz
-Source83:       https://github.com/KiCad/Transformers_SMD.pretty/archive/%{version}.tar.gz#/Transformers_SMD.pretty-%{version}.tar.gz
-Source84:       https://github.com/KiCad/Transformers_THT.pretty/archive/%{version}.tar.gz#/Transformers_THT.pretty-%{version}.tar.gz
-Source85:       https://github.com/KiCad/Transistors_OldSowjetAera.pretty/archive/%{version}.tar.gz#/Transistors_OldSowjetAera.pretty-%{version}.tar.gz
-Source86:       https://github.com/KiCad/Valves.pretty/archive/%{version}.tar.gz#/Valves.pretty-%{version}.tar.gz
-Source87:       https://github.com/KiCad/Varistors.pretty/archive/%{version}.tar.gz#/Varistors.pretty-%{version}.tar.gz
-Source88:       https://github.com/KiCad/Wire_Connections_Bridges.pretty/archive/%{version}.tar.gz#/Wire_Connections_Bridges.pretty-%{version}.tar.gz
-Source89:       https://github.com/KiCad/Wire_Pads.pretty/archive/%{version}.tar.gz#/Wire_Pads.pretty-%{version}.tar.gz
-
-Patch1:         kicad-4.0.0-nostrip.patch
-Patch2:         kicad-4.0.0-freerouting.patch
-# https://code.launchpad.net/~lkundrak/kicad/appstream-data/+merge/293391
-Patch3:         kicad-4.0.2-appstream.patch
-Patch4:         kicad-4.0.5-boost.patch
-
-# boost-context is only available on the following architectures:
-ExclusiveArch:  %{ix86} x86_64 %{arm} ppc64 ppc64le aarch64
+# TODO: Insert correct URLs here
+Source0:        %{name}-%{version}.tar.gz
+Source1:        %{name}-i18n-%{version}.tar.gz
+Source2:        %{name}-doc-%{version}.tar.gz
+Source3:        %{name}-templates-%{version}.tar.gz
+Source4:        %{name}-symbols-%{version}.tar.gz
+Source5:        %{name}-footprints-%{version}.tar.gz
+Source6:        %{name}-packages3D-%{version}.tar.gz
 
 BuildRequires:  desktop-file-utils
 BuildRequires:  compat-wxGTK3-gtk2-devel
@@ -117,9 +22,14 @@ BuildRequires:  boost-devel
 BuildRequires:  cmake
 BuildRequires:  doxygen
 BuildRequires:  glew-devel
-BuildRequires:  pkgconfig(openssl)
 BuildRequires:  libappstream-glib
 BuildRequires:  libcurl-devel
+BuildRequires:  gettext
+BuildRequires:  swig
+BuildRequires:  glm-devel
+BuildRequires:  OCE-devel
+BuildRequires:  openssl-devel
+BuildRequires:  python2-devel
 
 # Documentation
 BuildRequires:  asciidoc
@@ -127,8 +37,10 @@ BuildRequires:  dblatex
 BuildRequires:  po4a
 BuildRequires:  perl(Unicode::GCString)
 
-Requires:       freerouting
+#TODO: Add runtime dependencies
+#Requires: 
 
+#TODO: Update description (remove Cvpcb, etc.)
 %description
 KiCad is an EDA software to design electronic schematic
 diagrams and printed circuit board artwork up to 16 layers.
@@ -139,10 +51,9 @@ KiCad is a set of four softwares and a project manager:
 - Cvpcb: footprint selector for components used in the circuit design
 - Gerbview: GERBER viewer (photoplotter documents)
 
-%package        doc
+%package doc
 Summary:        Documentation for KiCad
-Group:          Documentation
-License:        GPLv2+
+License:        GPLv3+
 BuildArch:      noarch
 
 Provides:       %{name}-doc-de = %{version}-%{release}
@@ -167,41 +78,51 @@ Obsoletes:      %{name}-doc-pt < %{version}-%{release}
 Obsoletes:      %{name}-doc-ru < %{version}-%{release}
 Obsoletes:      %{name}-doc-zh_CN < %{version}-%{release}
 
-%description    doc
+%description doc
 Documentation for KiCad.
+
+%package templates
+Summary:        Templates for KiCad
+License:        CC-BY-SA
+BuildArch:      noarch
+Requires:       kicad >= 5.0.0
+
+%description templates
+Templates for KiCad.
+
+%package symbols
+Summary:        Schematic symbols for KiCad
+License:        CC-BY-SA
+BuildArch:      noarch
+Requires:       kicad >= 5.0.0
+
+%description symbols
+Schematic symbols for KiCad.
+
+%package footprints
+Summary:        Footprints for KiCad
+License:        CC-BY-SA
+BuildArch:      noarch
+Requires:       kicad >= 5.0.0
+
+%description footprints
+Footprints for KiCad.
+
+%package packages3d
+Summary:        3D models for KiCad
+License:        CC-BY-SA
+BuildArch:      noarch
+Requires:       kicad >= 5.0.0
+
+%description packages3d
+3D models for KiCad.
 
 
 %prep
-%setup -q -a 1 -a 2 -a 3
-
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-
-sed -i "s|KICAD_PLUGINS lib/kicad/plugins|KICAD_PLUGINS %{_lib}/kicad/plugins|" CMakeLists.txt
+%setup -q -a 1 -a 2 -a 3 -a 4 -a 5 -a 6
 
 
 %build
-
-# Symbols libraries
-pushd %{name}-library-%{version}/
-%cmake
-make -j1 VERBOSE=1
-popd
-
-# Documentation
-pushd %{name}-doc-%{version}/
-%cmake -DBUILD_FORMATS=html
-make -j1 VERBOSE=1
-popd
-
-# Translations
-mkdir %{name}-i18n-%{version}/build
-pushd %{name}-i18n-%{version}/build
-%cmake -DKICAD_I18N_UNIX_STRICT_PATH=ON ..
-make -j1 VERBOSE=1
-popd
 
 # Core components
 %if 0%{?fedora} > 27
@@ -209,16 +130,78 @@ popd
 %else
 %global wx_config wx-config-3.0-gtk2
 %endif
-%cmake -DKICAD_SKIP_BOOST=ON -DKICAD_BUILD_VERSION="%{version}-%{release}" \
-  -DwxWidgets_CONFIG_EXECUTABLE=%{_bindir}/%{wx_config}
-make %{_smp_mflags} VERBOSE=1
+
+%cmake \
+    -DUSE_WX_GRAPHICS_CONTEXT=OFF \
+    -DUSE_WX_OVERLAY=OFF \
+    -DKICAD_SCRIPTING=ON \
+    -DKICAD_SCRIPTING_MODULES=ON \
+    -DKICAD_SCRIPTING_WXPYTHON=OFF \
+    -DKICAD_SCRIPTING_ACTION_MENU=ON \
+    -DKICAD_USE_OCE=ON \
+    -DKICAD_INSTALL_DEMOS=ON \
+    -DBUILD_GITHUB_PLUGIN=ON \
+    -DKICAD_SPICE=OFF \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DwxWidgets_CONFIG_EXECUTABLE=%{_bindir}/%{wx_config} \
+    .
+%make_build
+
+# Localization
+mkdir %{name}-i18n-%{version}/build/
+pushd %{name}-i18n-%{version}/build/
+%cmake \
+    -DKICAD_I18N_UNIX_STRICT_PATH=ON \
+    ..
+%make_build
+popd
+
+# Documentation (HTML only)
+mkdir %{name}-doc-%{version}/build/
+pushd %{name}-doc-%{version}/build/
+%cmake \
+    -DBUILD_FORMATS=html \
+    ..
+%make_build
+popd
+
+# Templates
+pushd %{name}-templates-%{version}/
+%cmake .
+%make_build
+popd
+
+# Symbol libraries
+pushd %{name}-symbols-%{version}/
+%cmake .
+%make_build
+popd
+
+# Footprint libraries
+pushd %{name}-footprints-%{version}/
+%cmake .
+%make_build
+popd
+
+# 3D models
+pushd %{name}-packages3D-%{version}/
+%cmake .
+%make_build
+popd
 
 
 %install
-# KiCAD itself
-make INSTALL="install -p" DESTDIR=%{buildroot} install
 
-# install desktop
+# KiCad application
+%make_install
+%{__cp} -p AUTHORS.txt %{buildroot}%{_docdir}/%{name}/
+
+# Localization
+pushd %{name}-i18n-%{version}/build/
+%make_install
+popd
+
+# Desktop integration
 for desktopfile in %{buildroot}%{_datadir}/applications/*.desktop ; do
   desktop-file-install \
   --dir %{buildroot}%{_datadir}/applications \
@@ -227,35 +210,31 @@ for desktopfile in %{buildroot}%{_datadir}/applications/*.desktop ; do
   ${desktopfile}
 done
 
-# Symbols libraries
-pushd %{name}-library-%{version}/
-make INSTALL="install -p" DESTDIR=%{buildroot} install
-popd
-
-# install template
-install -d %{buildroot}%{_datadir}/%{name}/template
-install -m 644 template/%{name}.pro %{buildroot}%{_datadir}/%{name}/template
-
-# Footprints
-mkdir -p %{buildroot}%{_datadir}/%{name}/modules
-for S in %{sources}; do
-  P=$(basename $S |sed -n 's/\.pretty-.*/.pretty/p')
-  [ "$P" ] || continue
-  mkdir -p %{buildroot}%{_datadir}/%{name}/modules/$P
-  tar xzf $S --strip-components=1 -C %{buildroot}%{_datadir}/%{name}/modules/$P
-done
-ln -f %{buildroot}%{_datadir}/%{name}/template/fp-lib-table{.for-pretty,}
-
 # Documentation
-pushd %{name}-doc-%{version}/
-make INSTALL="install -p" DESTDIR=%{buildroot} install
+pushd %{name}-doc-%{version}/build/
+%make_install
 popd
 
-# Translations
-pushd %{name}-i18n-%{version}/build
-make -j1 VERBOSE=1
-make INSTALL="install -p" DESTDIR=%{buildroot} install
+# Templates
+pushd %{name}-templates-%{version}/
+%make_install
 popd
+
+# Symbol libraries
+pushd %{name}-symbols-%{version}/
+%make_install
+popd
+
+# Footprint libraries
+pushd %{name}-footprints-%{version}/
+%make_install
+popd
+
+# 3D models
+pushd %{name}-packages3D-%{version}/
+%make_install
+popd
+
 %find_lang %{name}
 for F in %{buildroot}%{_docdir}/%{name}/help/*/; do
    L=$(basename $F)
@@ -265,11 +244,6 @@ done
 
 %check
 appstream-util validate-relax --nonet %{buildroot}/%{_datadir}/appdata/*.appdata.xml
-
-# Ensure all known footprint libraries are present
-for P in $(sed -n 's|.*uri \${KISYSMOD}/\([^)]*\).*|\1|p' %{buildroot}%{_datadir}/%{name}/template/fp-lib-table); do
-  [ -d %{buildroot}%{_datadir}/%{name}/modules/$P ] || exit 1
-done
 
 
 %post
@@ -296,23 +270,50 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 
 %files -f %{name}.lang
 %{_bindir}/*
-%{_libdir}/%{name}
-%{_datadir}/%{name}/
-%{_datadir}/applications/*.desktop
+%{_libdir}/%{name}/*
+%{_libdir}/libkicad_3dsg.so*
+%{python2_sitelib}/*pcbnew*
+%{_datadir}/%{name}/demos/*
+%{_datadir}/%{name}/scripting/*
+%{_datadir}/%{name}/template/kicad.pro
 %{_datadir}/appdata/*.appdata.xml
+%{_datadir}/applications/*.desktop
 %{_datadir}/icons/hicolor/*/mimetypes/application-x-*.*
 %{_datadir}/icons/hicolor/*/apps/*.*
-%{_datadir}/mime/packages/%{name}.xml
-%{_datadir}/mimelnk/application/x-%{name}-*.desktop
-%dir %{_docdir}/%{name}/
-%{_docdir}/%{name}/*.txt
+%{_datadir}/mime/packages/*.xml
 
 %files doc -f help.lang
-%dir %{_docdir}/%{name}
-%{_docdir}/%{name}/scripts
+%{_docdir}/%{name}/*.txt
+%{_docdir}/%{name}/scripts/*
+%license %{name}-doc-%{version}/LICENSE.adoc
+
+%files templates
+%exclude %{_datadir}/%{name}/template/fp-lib-table
+%exclude %{_datadir}/%{name}/template/sym-lib-table
+%exclude %{_datadir}/%{name}/template/kicad.pro
+%{_datadir}/%{name}/template/*
+%license %{name}-templates-%{version}/LICENSE.md
+
+%files symbols
+%{_datadir}/%{name}/library/*.dcm
+%{_datadir}/%{name}/library/*.lib
+%{_datadir}/%{name}/template/sym-lib-table
+%license %{name}-symbols-%{version}/LICENSE.md
+
+%files footprints
+%{_datadir}/%{name}/modules/*.pretty
+%{_datadir}/%{name}/template/fp-lib-table
+%license %{name}-footprints-%{version}/LICENSE.md
+
+%files packages3d
+%{_datadir}/%{name}/modules/packages3d/*.3dshapes
+%license %{name}-packages3D-%{version}/LICENSE.md
 
 
 %changelog
+* Thu Mar 08 2018 Placeholder <place@hold.er> - 1:5.0.0-1
+- Update to 5.0.0
+
 * Wed Feb 07 2018 Fedora Release Engineering <releng@fedoraproject.org> - 1:4.0.7-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
 
