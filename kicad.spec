@@ -249,22 +249,6 @@ popd
 appstream-util validate-relax --nonet %{buildroot}/%{_datadir}/appdata/*.appdata.xml
 
 
-%post
-touch --no-create %{_datadir}/icons/hicolor || :
-
-
-%postun
-if [ $1 -eq 0 ]
-then
-  touch --no-create %{_datadir}/icons/hicolor || :
-  gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
-fi
-
-
-%posttrans
-gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
-
-
 %files -f %{name}.lang
 %{_bindir}/*
 %{_libdir}/%{name}/*
