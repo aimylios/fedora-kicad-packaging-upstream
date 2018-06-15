@@ -14,10 +14,12 @@ URL:            http://www.kicad-pcb.org
 Source0:	https://launchpad.net/kicad/5.0/%{version}-%{candidate}/+download/kicad-%{version}-%{candidate}.tar.xz
 Source1:	https://github.com/KiCad/kicad-doc/archive/%{version}-%{candidate}.tar.gz#/kicad-doc-%{version}-%{candidate}.tar.gz
 Source2:	https://github.com/KiCad/kicad-i18n/archive/%{version}-%{candidate}.tar.gz#/kicad-i18n-%{version}-%{candidate}.tar.gz
+Source3:	https://github.com/KiCad/kicad-templates/archive/%{version}-%{candidate}.tar.gz#/kicad-templates-%{version}-%{candidate}.tar.gz
 
 #Source0:	https://launchpad.net/kicad/5.0/%%{version}/+download/kicad-%%{version}.tar.xz
 #Source1:	https://github.com/KiCad/kicad-doc/archive/%%{version}.tar.gz#/kicad-doc-%%{version}.tar.gz
 #Source2:	https://github.com/KiCad/kicad-i18n/archive/%%{version}.tar.gz#/kicad-i18n-%%{version}.tar.gz
+#Source3:	https://github.com/KiCad/kicad-templates/archive/%%{version}.tar.gz#/kicad-templates-%%{version}.tar.gz
 
 Patch1:         kicad-5.0.0-nostrip.patch
 Patch2:         kicad-5.0.0-freerouting.patch
@@ -101,8 +103,13 @@ mv kicad-doc-%{version}-%{candidate} kicad-doc-%{version}
 %setup -n kicad-%{version}-%{candidate} -D -T -a 2
 mv kicad-i18n-%{version}-%{candidate} kicad-i18n-%{version}
 
+# The templates repo will create a tar with -rc2 in the root dir name.  We
+# rename the dir to remove the -rc2 portion.
+%setup -n kicad-%{version}-%{candidate} -D -T -a 3
+mv kicad-templates-%{version}-%{candidate} kicad-templates-%{version}
+
 # Eventually we should just be able to do:
-#%%setup -q -a 1 -a 2
+#%%setup -q -a 1 -a 2 -a 3
 
 %patch1 -p1
 %patch2 -p1
@@ -140,6 +147,12 @@ pushd %{name}-i18n-%{version}/build/
 %make_build
 popd
 
+# Templates
+pushd %{name}-templates-%{version}/
+%cmake .
+%make_build
+popd
+
 # Documentation (HTML only)
 mkdir %{name}-doc-%{version}/build/
 pushd %{name}-doc-%{version}/build/
@@ -168,6 +181,11 @@ for desktopfile in %{buildroot}%{_datadir}/applications/*.desktop ; do
   --delete-original                          \
   ${desktopfile}
 done
+
+# Templates
+pushd %{name}-templates-%{version}/
+%make_install
+popd
 
 # Documentation
 pushd %{name}-doc-%{version}/build/
