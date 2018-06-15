@@ -1,16 +1,23 @@
+%global candidate rc2
+
 Name:           kicad
-Version:        4.0.7
-Release:        3%{?dist}
+Version:        5.0.0
+Release:        0.1.%{candidate}%{?dist}
 Epoch:          1
 Summary:        EDA software suite for creation of schematic diagrams and PCBs
 
 Group:          Applications/Engineering
-License:        GPLv2+
+License:        GPLv3+
 URL:            http://www.kicad-pcb.org
 
-Source:         https://launchpad.net/kicad/4.0/%{version}/+download/kicad-%{version}.tar.xz
-Source1:        https://github.com/KiCad/kicad-doc/archive/%{version}.tar.gz#/kicad-doc-%{version}.tar.gz
-Source3:        https://github.com/KiCad/kicad-i18n/archive/%{version}.tar.gz#/kicad-i18n-%{version}.tar.gz
+# These are temporary until 5.0.0 is released.
+Source0:	https://launchpad.net/kicad/5.0/%{version}-%{candidate}/+download/kicad-%{version}-%{candidate}.tar.xz
+Source1:	https://github.com/KiCad/kicad-doc/archive/%{version}-%{candidate}.tar.gz#/kicad-doc-%{version}-%{candidate}.tar.gz
+Source2:	https://github.com/KiCad/kicad-i18n/archive/%{version}-%{candidate}.tar.gz#/kicad-i18n-%{version}-%{candidate}.tar.gz
+
+#Source0:	https://launchpad.net/kicad/5.0/%%{version}/+download/kicad-%%{version}.tar.xz
+#Source1:	https://github.com/KiCad/kicad-doc/archive/%%{version}.tar.gz#/kicad-doc-%%{version}.tar.gz
+#Source2:	https://github.com/KiCad/kicad-i18n/archive/%%{version}.tar.gz#/kicad-i18n-%%{version}.tar.gz
 
 Patch1:         kicad-4.0.0-nostrip.patch
 Patch2:         kicad-4.0.0-freerouting.patch
@@ -49,7 +56,7 @@ KiCad is a set of four softwares and a project manager:
 %package        doc
 Summary:        Documentation for KiCad
 Group:          Documentation
-License:        GPLv2+
+License:        GPLv3+ or CC-BY-3.0+
 BuildArch:      noarch
 
 Provides:       %{name}-doc-de = %{version}-%{release}
@@ -79,7 +86,22 @@ Documentation for KiCad.
 
 
 %prep
-%setup -q -a 1 -a 3
+# The -rc2 source tar on launchpad has a root directory that includes the -rc2
+# name component, so we have to account for that.
+%setup -n kicad-%{version}-%{candidate}
+
+# The doc repo will create a tar with -rc2 in the root dir name.  We rename
+# the dir to remove the -rc2 portion.
+%setup -n kicad-%{version}-%{candidate} -D -T -a 1
+mv kicad-doc-%{version}-%{candidate} kicad-doc-%{version}
+
+# The i18n repo will create a tar with -rc2 in the root dir name.  We rename
+# the dir to remove the -rc2 portion.
+%setup -n kicad-%{version}-%{candidate} -D -T -a 2
+mv kicad-i18n-%{version}-%{candidate} kicad-i18n-%{version}
+
+# Eventually we should just be able to do:
+#%%setup -q -a 1 -a 2
 
 %patch1 -p1
 %patch2 -p1
