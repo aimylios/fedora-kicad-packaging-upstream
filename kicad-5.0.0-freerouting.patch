@@ -1,18 +1,18 @@
-From f51140b80a0925d2d69b15030a7f8d54c2276832 Mon Sep 17 00:00:00 2001
+From 15e039ca1ca1af1f2c52a21d3571e9629c9580ef Mon Sep 17 00:00:00 2001
 From: Lubomir Rintel <lkundrak@v3.sk>
-Date: Wed, 24 Dec 2014 09:53:49 +0100
+Date: Mon, 4 Jun 2018 10:13:00 -0400
 Subject: [PATCH] Try to run freerouting by its JPackage launcher script
 
 It's a sin to touch the Java tool by its JAR file in Fedora.
 ---
- pcbnew/dialogs/dialog_freeroute_exchange.cpp | 23 ++++++++++++++++++++---
+ pcbnew/dialogs/dialog_freeroute_exchange.cpp | 23 +++++++++++++++++---
  1 file changed, 20 insertions(+), 3 deletions(-)
 
 diff --git a/pcbnew/dialogs/dialog_freeroute_exchange.cpp b/pcbnew/dialogs/dialog_freeroute_exchange.cpp
-index 7b057f6..4207d4e 100644
+index 3200de151..17e9e0543 100644
 --- a/pcbnew/dialogs/dialog_freeroute_exchange.cpp
 +++ b/pcbnew/dialogs/dialog_freeroute_exchange.cpp
-@@ -71,7 +71,10 @@ void DIALOG_FREEROUTE::MyInit()
+@@ -82,7 +82,10 @@ void DIALOG_FREEROUTE::init()
      SetFocus();
      m_freeRouterFound = false;
  
@@ -24,7 +24,7 @@ index 7b057f6..4207d4e 100644
  
      if( fileName.FileExists() )
          m_freeRouterFound = true;
-@@ -126,8 +129,22 @@ void DIALOG_FREEROUTE::OnLaunchButtonClick( wxCommandEvent& event )
+@@ -131,8 +134,22 @@ void DIALOG_FREEROUTE::OnLaunchButtonClick( wxCommandEvent& event )
              return;
      }
  
@@ -50,5 +50,5 @@ index 7b057f6..4207d4e 100644
      // Find the Java application on Windows.
      // Colud be no more needed since we now have to run only java, not java web start
 -- 
-2.5.0
+2.17.1
 

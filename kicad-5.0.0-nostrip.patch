@@ -1,16 +1,17 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index ec4c5b7..1350307 100644
+index 6c52528fb..786b672f0 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -187,7 +187,6 @@ if( CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang" )
-     endif()
+@@ -278,8 +278,6 @@ if( CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang" )
+     set( CMAKE_CXX_FLAGS_DEBUG "-g3 -ggdb3 -DDEBUG -Wno-deprecated-declarations" )
  
      if( MINGW )
 -        set( CMAKE_EXE_LINKER_FLAGS_RELEASE "-s" )
- 
+-
          # _UNICODE definition seems needed under mingw/gcc 4.8
          # (Kicad uses unicode, and on Windows, wxWidgets >= 2.9.4 is mandatory
-@@ -236,8 +235,6 @@ if( CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang" )
+         # and uses unicode)
+@@ -318,8 +316,6 @@ if( CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang" )
              set( CMAKE_SHARED_LINKER_FLAGS "${TO_LINKER},--no-undefined" )
              set( CMAKE_MODULE_LINKER_FLAGS "${TO_LINKER},--no-undefined" )
  

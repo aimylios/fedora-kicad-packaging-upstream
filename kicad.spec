@@ -19,8 +19,8 @@ Source2:	https://github.com/KiCad/kicad-i18n/archive/%{version}-%{candidate}.tar
 #Source1:	https://github.com/KiCad/kicad-doc/archive/%%{version}.tar.gz#/kicad-doc-%%{version}.tar.gz
 #Source2:	https://github.com/KiCad/kicad-i18n/archive/%%{version}.tar.gz#/kicad-i18n-%%{version}.tar.gz
 
-Patch1:         kicad-4.0.0-nostrip.patch
-Patch2:         kicad-4.0.0-freerouting.patch
+Patch1:         kicad-5.0.0-nostrip.patch
+Patch2:         kicad-5.0.0-freerouting.patch
 
 # boost-context is only available on the following architectures:
 ExclusiveArch:  %{ix86} x86_64 %{arm} ppc64 ppc64le aarch64
