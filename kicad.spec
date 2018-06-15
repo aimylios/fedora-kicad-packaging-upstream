@@ -17,6 +17,7 @@ Source2:	https://github.com/KiCad/kicad-i18n/archive/%{version}-%{candidate}.tar
 Source3:	https://github.com/KiCad/kicad-templates/archive/%{version}-%{candidate}.tar.gz#/kicad-templates-%{version}-%{candidate}.tar.gz
 Source4:	https://github.com/KiCad/kicad-symbols/archive/%{version}-%{candidate}.tar.gz#/kicad-symbols-%{version}-%{candidate}.tar.gz
 Source5:	https://github.com/KiCad/kicad-footprints/archive/%{version}-%{candidate}.tar.gz#/kicad-footprints-%{version}-%{candidate}.tar.gz
+Source6:	https://github.com/KiCad/kicad-packages3D/archive/%{version}-%{candidate}.tar.gz#/kicad-packages3D-%{version}-%{candidate}.tar.gz
 
 #Source0:	https://launchpad.net/kicad/5.0/%%{version}/+download/kicad-%%{version}.tar.xz
 #Source1:	https://github.com/KiCad/kicad-doc/archive/%%{version}.tar.gz#/kicad-doc-%%{version}.tar.gz
@@ -24,6 +25,7 @@ Source5:	https://github.com/KiCad/kicad-footprints/archive/%{version}-%{candidat
 #Source3:	https://github.com/KiCad/kicad-templates/archive/%%{version}.tar.gz#/kicad-templates-%%{version}.tar.gz
 #Source4:	https://github.com/KiCad/kicad-symbols/archive/%%{version}.tar.gz#/kicad-symbols-%%{version}.tar.gz
 #Source5:	https://github.com/KiCad/kicad-footprints/archive/%%{version}.tar.gz#/kicad-footprints-%%{version}.tar.gz
+#Source6:	https://github.com/KiCad/kicad-packages3D/archive/%%{version}.tar.gz#/kicad-packages3D-%%{version}.tar.gz
 
 Patch1:         kicad-5.0.0-nostrip.patch
 Patch2:         kicad-5.0.0-freerouting.patch
@@ -122,8 +124,13 @@ mv kicad-symbols-%{version}-%{candidate} kicad-symbols-%{version}
 %setup -n kicad-%{version}-%{candidate} -D -T -a 5
 mv kicad-footprints-%{version}-%{candidate} kicad-footprints-%{version}
 
+# The packages3D repo will create a tar with -rc2 in the root dir name.  We
+# rename the dir to remove the -rc2 portion.
+%setup -n kicad-%{version}-%{candidate} -D -T -a 6
+mv kicad-packages3D-%{version}-%{candidate} kicad-packages3D-%{version}
+
 # Eventually we should just be able to do:
-#%%setup -q -a 1 -a 2 -a 3 -a 4 -a 5
+#%%setup -q -a 1 -a 2 -a 3 -a 4 -a 5 -a 6
 
 %patch1 -p1
 %patch2 -p1
@@ -179,6 +186,12 @@ pushd %{name}-footprints-%{version}/
 %make_build
 popd
 
+# 3D package libraries
+pushd %{name}-packages3D-%{version}/
+%cmake .
+%make_build
+popd
+
 # Documentation (HTML only)
 mkdir %{name}-doc-%{version}/build/
 pushd %{name}-doc-%{version}/build/
@@ -220,6 +233,11 @@ popd
 
 # Footprint libraries
 pushd %{name}-footprints-%{version}/
+%make_install
+popd
+
+# 3D models
+pushd %{name}-packages3D-%{version}/
 %make_install
 popd
 
