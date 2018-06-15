@@ -112,28 +112,44 @@ sed -i "s|KICAD_PLUGINS lib/kicad/plugins|KICAD_PLUGINS %{_lib}/kicad/plugins|" 
 
 %build
 
-# Documentation
-pushd %{name}-doc-%{version}/
-%cmake -DBUILD_FORMATS=html
-make -j1 VERBOSE=1
-popd
-
-# Translations
-mkdir %{name}-i18n-%{version}/build
-pushd %{name}-i18n-%{version}/build
-%cmake -DKICAD_I18N_UNIX_STRICT_PATH=ON ..
-make -j1 VERBOSE=1
-popd
-
-# Core components
+# compat-wxGTK3-gtk2-devel is now merged with wxGTK3-devel and uses a single wx-config
 %if 0%{?fedora} > 27
 %global wx_config wx-config
 %else
 %global wx_config wx-config-3.0-gtk2
 %endif
-%cmake -DKICAD_SKIP_BOOST=ON -DKICAD_BUILD_VERSION="%{version}-%{release}" \
-  -DwxWidgets_CONFIG_EXECUTABLE=%{_bindir}/%{wx_config}
-make %{_smp_mflags} VERBOSE=1
+
+# KiCad application
+%cmake \
+    -DKICAD_SCRIPTING=OFF \
+    -DKICAD_SCRIPTING_MODULES=OFF \
+    -DKICAD_SCRIPTING_WXPYTHON=OFF \
+    -DKICAD_SPICE=OFF \
+    -DKICAD_VERSION_EXTRA=%{release} \
+    -DwxWidgets_CONFIG_EXECUTABLE=%{_bindir}/%{wx_config} \
+    .
+# workaround to get WXPYTHON_VERSION set in config.h
+%{__make} rebuild_cache
+# end workaround
+%make_build
+
+# Localization
+mkdir %{name}-i18n-%{version}/build/
+pushd %{name}-i18n-%{version}/build/
+%cmake \
+    -DKICAD_I18N_UNIX_STRICT_PATH=ON \
+    ..
+%make_build
+popd
+
+# Documentation (HTML only)
+mkdir %{name}-doc-%{version}/build/
+pushd %{name}-doc-%{version}/build/
+%cmake \
+    -DBUILD_FORMATS=html \
+    ..
+%make_build
+popd
 
 
 %install
