@@ -53,14 +53,9 @@ BuildRequires:  dblatex
 BuildRequires:  po4a
 
 %description
-KiCad is an EDA software to design electronic schematic
-diagrams and printed circuit board artwork up to 16 layers.
-KiCad is a set of four softwares and a project manager:
-- KiCad: project manager
-- Eeschema: schematic entry
-- Pcbnew: board editor
-- Cvpcb: footprint selector for components used in the circuit design
-- Gerbview: GERBER viewer (photoplotter documents)
+KiCad is EDA software to design electronic schematic
+diagrams and printed circuit board artwork of up to
+32 layers.
 
 %package        doc
 Summary:        Documentation for KiCad
@@ -294,6 +289,9 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 
 
 %changelog
+* Thu Jun 14 2018 Steven A. Falco <stevenfalco@gmail.com> - 1:5.0.0-0.1.rc2
+- Update to 5.0.0-rc2
+
 * Wed Feb 07 2018 Fedora Release Engineering <releng@fedoraproject.org> - 1:4.0.7-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
 
