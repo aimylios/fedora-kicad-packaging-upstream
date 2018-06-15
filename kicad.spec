@@ -10,7 +10,6 @@ URL:            http://www.kicad-pcb.org
 
 Source:         https://launchpad.net/kicad/4.0/%{version}/+download/kicad-%{version}.tar.xz
 Source1:        https://github.com/KiCad/kicad-doc/archive/%{version}.tar.gz#/kicad-doc-%{version}.tar.gz
-Source2:        https://github.com/KiCad/kicad-library/archive/%{version}.tar.gz#/kicad-library-%{version}.tar.gz
 Source3:        https://github.com/KiCad/kicad-i18n/archive/%{version}.tar.gz#/kicad-i18n-%{version}.tar.gz
 
 Patch1:         kicad-4.0.0-nostrip.patch
@@ -83,7 +82,7 @@ Documentation for KiCad.
 
 
 %prep
-%setup -q -a 1 -a 2 -a 3
+%setup -q -a 1 -a 3
 
 %patch1 -p1
 %patch2 -p1
@@ -94,12 +93,6 @@ sed -i "s|KICAD_PLUGINS lib/kicad/plugins|KICAD_PLUGINS %{_lib}/kicad/plugins|" 
 
 
 %build
-
-# Symbols libraries
-pushd %{name}-library-%{version}/
-%cmake
-make -j1 VERBOSE=1
-popd
 
 # Documentation
 pushd %{name}-doc-%{version}/
@@ -137,11 +130,6 @@ for desktopfile in %{buildroot}%{_datadir}/applications/*.desktop ; do
   --delete-original                          \
   ${desktopfile}
 done
-
-# Symbols libraries
-pushd %{name}-library-%{version}/
-make INSTALL="install -p" DESTDIR=%{buildroot} install
-popd
 
 # install template
 install -d %{buildroot}%{_datadir}/%{name}/template
