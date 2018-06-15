@@ -153,8 +153,14 @@ popd
 
 
 %install
-# KiCAD itself
-make INSTALL="install -p" DESTDIR=%{buildroot} install
+
+# KiCad application
+%make_install
+
+# Localization
+pushd %{name}-i18n-%{version}/build/
+%make_install
+popd
 
 # install desktop
 for desktopfile in %{buildroot}%{_datadir}/applications/*.desktop ; do
@@ -165,25 +171,12 @@ for desktopfile in %{buildroot}%{_datadir}/applications/*.desktop ; do
   ${desktopfile}
 done
 
-# install template
-install -d %{buildroot}%{_datadir}/%{name}/template
-install -m 644 template/%{name}.pro %{buildroot}%{_datadir}/%{name}/template
-
 # Documentation
-pushd %{name}-doc-%{version}/
-make INSTALL="install -p" DESTDIR=%{buildroot} install
+pushd %{name}-doc-%{version}/build/
+%make_install
 popd
 
-# Translations
-pushd %{name}-i18n-%{version}/build
-make -j1 VERBOSE=1
-make INSTALL="install -p" DESTDIR=%{buildroot} install
-popd
 %find_lang %{name}
-for F in %{buildroot}%{_docdir}/%{name}/help/*/; do
-   L=$(basename $F)
-   echo "%%lang($L) %{_docdir}/%{name}/help/$L" >>help.lang
-done
 
 
 %check
@@ -214,20 +207,20 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 
 %files -f %{name}.lang
 %{_bindir}/*
-%{_libdir}/%{name}
-%{_datadir}/%{name}/
+%{_libdir}/%{name}/*
+%{_libdir}/libkicad_3dsg.so*
+%{_datadir}/%{name}/*
+%{_datadir}/appdata/*.xml
 %{_datadir}/applications/*.desktop
-%{_datadir}/appdata/*.appdata.xml
 %{_datadir}/icons/hicolor/*/mimetypes/application-x-*.*
 %{_datadir}/icons/hicolor/*/apps/*.*
-%{_datadir}/mime/packages/%{name}.xml
-%{_datadir}/mimelnk/application/x-%{name}-*.desktop
-%dir %{_docdir}/%{name}/
-%{_docdir}/%{name}/*.txt
+%{_datadir}/mime/packages/*.xml
 
-%files doc -f help.lang
-%dir %{_docdir}/%{name}
-%{_docdir}/%{name}/scripts
+%files doc
+%doc AUTHORS.txt
+%{_docdir}/%{name}/help/*
+%{_docdir}/%{name}/scripts/*
+%license %{name}-doc-%{version}/LICENSE.adoc
 
 
 %changelog
