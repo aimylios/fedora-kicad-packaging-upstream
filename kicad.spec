@@ -22,8 +22,8 @@ Source2:	https://github.com/KiCad/kicad-i18n/archive/%{version}-%{candidate}.tar
 Patch1:         kicad-5.0.0-nostrip.patch
 Patch2:         kicad-5.0.0-freerouting.patch
 
-# boost-context is only available on the following architectures:
-ExclusiveArch:  %{ix86} x86_64 %{arm} ppc64 ppc64le aarch64
+# kicad is only available on the following architectures (see https://bugs.launchpad.net/kicad/+bug/1755752):
+ExclusiveArch:  %{ix86} x86_64 %{arm} aarch64
 
 BuildRequires:  desktop-file-utils
 BuildRequires:  compat-wxGTK3-gtk2-devel
@@ -31,17 +31,18 @@ BuildRequires:  boost-devel
 BuildRequires:  cmake
 BuildRequires:  doxygen
 BuildRequires:  glew-devel
-BuildRequires:  pkgconfig(openssl)
 BuildRequires:  libappstream-glib
 BuildRequires:  libcurl-devel
+BuildRequires:  gettext
+BuildRequires:  swig
+BuildRequires:  glm-devel
+BuildRequires:  OCE-devel
+BuildRequires:  openssl-devel
 
 # Documentation
 BuildRequires:  asciidoc
 BuildRequires:  dblatex
 BuildRequires:  po4a
-BuildRequires:  perl(Unicode::GCString)
-
-Requires:       freerouting
 
 %description
 KiCad is an EDA software to design electronic schematic
