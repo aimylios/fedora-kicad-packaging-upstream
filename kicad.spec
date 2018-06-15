@@ -107,8 +107,6 @@ mv kicad-i18n-%{version}-%{candidate} kicad-i18n-%{version}
 %patch1 -p1
 %patch2 -p1
 
-sed -i "s|KICAD_PLUGINS lib/kicad/plugins|KICAD_PLUGINS %{_lib}/kicad/plugins|" CMakeLists.txt
-
 
 %build
 
