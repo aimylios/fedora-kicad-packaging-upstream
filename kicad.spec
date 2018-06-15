@@ -14,9 +14,6 @@ Source3:        https://github.com/KiCad/kicad-i18n/archive/%{version}.tar.gz#/k
 
 Patch1:         kicad-4.0.0-nostrip.patch
 Patch2:         kicad-4.0.0-freerouting.patch
-# https://code.launchpad.net/~lkundrak/kicad/appstream-data/+merge/293391
-Patch3:         kicad-4.0.2-appstream.patch
-Patch4:         kicad-4.0.5-boost.patch
 
 # boost-context is only available on the following architectures:
 ExclusiveArch:  %{ix86} x86_64 %{arm} ppc64 ppc64le aarch64
@@ -86,8 +83,6 @@ Documentation for KiCad.
 
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
-%patch4 -p1
 
 sed -i "s|KICAD_PLUGINS lib/kicad/plugins|KICAD_PLUGINS %{_lib}/kicad/plugins|" CMakeLists.txt
 
