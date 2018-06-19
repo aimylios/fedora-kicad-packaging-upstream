@@ -49,7 +49,6 @@ BuildRequires:  openssl-devel
 
 # Documentation
 BuildRequires:  asciidoc
-BuildRequires:  dblatex
 BuildRequires:  po4a
 
 %description
@@ -191,6 +190,7 @@ popd
 mkdir %{name}-doc-%{version}/build/
 pushd %{name}-doc-%{version}/build/
 %cmake \
+    -DPDF_GENERATOR=none \
     -DBUILD_FORMATS=html \
     ..
 %make_build
