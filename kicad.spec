@@ -46,6 +46,7 @@ BuildRequires:  swig
 BuildRequires:  glm-devel
 BuildRequires:  OCE-devel
 BuildRequires:  openssl-devel
+Requires:       electronics-menu
 
 # Documentation
 BuildRequires:  asciidoc
