@@ -1,8 +1,8 @@
-%global candidate rc2
+%global candidate rc3
 
 Name:           kicad
 Version:        5.0.0
-Release:        0.1.%{candidate}%{?dist}
+Release:        0.2.%{candidate}%{?dist}
 Epoch:          1
 Summary:        EDA software suite for creation of schematic diagrams and PCBs
 
@@ -46,11 +46,12 @@ BuildRequires:  swig
 BuildRequires:  glm-devel
 BuildRequires:  OCE-devel
 BuildRequires:  openssl-devel
-Requires:       electronics-menu
 
 # Documentation
 BuildRequires:  asciidoc
 BuildRequires:  po4a
+
+Requires:       electronics-menu
 
 %description
 KiCad is EDA software to design electronic schematic
@@ -90,37 +91,37 @@ Documentation for KiCad.
 
 
 %prep
-# The -rc2 source tar on launchpad has a root directory that includes the -rc2
+# The -rc3 source tar on launchpad has a root directory that includes the -rc3
 # name component, so we have to account for that.
 %setup -n kicad-%{version}-%{candidate}
 
-# The doc repo will create a tar with -rc2 in the root dir name.  We rename
-# the dir to remove the -rc2 portion.
+# The doc repo will create a tar with -rc3 in the root dir name.  We rename
+# the dir to remove the -rc3 portion.
 %setup -n kicad-%{version}-%{candidate} -D -T -a 1
 mv kicad-doc-%{version}-%{candidate} kicad-doc-%{version}
 
-# The i18n repo will create a tar with -rc2 in the root dir name.  We rename
-# the dir to remove the -rc2 portion.
+# The i18n repo will create a tar with -rc3 in the root dir name.  We rename
+# the dir to remove the -rc3 portion.
 %setup -n kicad-%{version}-%{candidate} -D -T -a 2
 mv kicad-i18n-%{version}-%{candidate} kicad-i18n-%{version}
 
-# The templates repo will create a tar with -rc2 in the root dir name.  We
-# rename the dir to remove the -rc2 portion.
+# The templates repo will create a tar with -rc3 in the root dir name.  We
+# rename the dir to remove the -rc3 portion.
 %setup -n kicad-%{version}-%{candidate} -D -T -a 3
 mv kicad-templates-%{version}-%{candidate} kicad-templates-%{version}
 
-# The symbols repo will create a tar with -rc2 in the root dir name.  We
-# rename the dir to remove the -rc2 portion.
+# The symbols repo will create a tar with -rc3 in the root dir name.  We
+# rename the dir to remove the -rc3 portion.
 %setup -n kicad-%{version}-%{candidate} -D -T -a 4
 mv kicad-symbols-%{version}-%{candidate} kicad-symbols-%{version}
 
-# The footprints repo will create a tar with -rc2 in the root dir name.  We
-# rename the dir to remove the -rc2 portion.
+# The footprints repo will create a tar with -rc3 in the root dir name.  We
+# rename the dir to remove the -rc3 portion.
 %setup -n kicad-%{version}-%{candidate} -D -T -a 5
 mv kicad-footprints-%{version}-%{candidate} kicad-footprints-%{version}
 
-# The packages3D repo will create a tar with -rc2 in the root dir name.  We
-# rename the dir to remove the -rc2 portion.
+# The packages3D repo will create a tar with -rc3 in the root dir name.  We
+# rename the dir to remove the -rc3 portion.
 %setup -n kicad-%{version}-%{candidate} -D -T -a 6
 mv kicad-packages3D-%{version}-%{candidate} kicad-packages3D-%{version}
 
@@ -268,6 +269,9 @@ appstream-util validate-relax --nonet %{buildroot}/%{_datadir}/appdata/*.appdata
 
 
 %changelog
+* Wed Jul 04 2018 Steven A. Falco <stevenfalco@gmail.com> - 1:5.0.0-0.2.rc3
+- Update to 5.0.0-rc3
+
 * Thu Jun 14 2018 Steven A. Falco <stevenfalco@gmail.com> - 1:5.0.0-0.1.rc2
 - Update to 5.0.0-rc2
 
