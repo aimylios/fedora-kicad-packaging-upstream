@@ -2,7 +2,7 @@
 
 Name:           kicad
 Version:        5.0.0
-Release:        0.3.%{candidate}%{?dist}
+Release:        0.4.%{candidate}%{?dist}
 Epoch:          1
 Summary:        EDA software suite for creation of schematic diagrams and PCBs
 
@@ -46,6 +46,8 @@ BuildRequires:  swig
 BuildRequires:  glm-devel
 BuildRequires:  OCE-devel
 BuildRequires:  openssl-devel
+BuildRequires:  gcc
+BuildRequires:  gcc-c++
 
 # Documentation
 BuildRequires:  asciidoc
@@ -269,6 +271,9 @@ appstream-util validate-relax --nonet %{buildroot}/%{_datadir}/appdata/*.appdata
 
 
 %changelog
+* Sat Jul 14 2018 Steven A. Falco <stevenfalco@gmail.com> - 1:5.0.0-0.4.rc3
+- Adding BuildRequires to fix "missing compiler" error with the latest rawhide
+
 * Fri Jul 13 2018 Fedora Release Engineering <releng@fedoraproject.org> - 1:5.0.0-0.3.rc3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
 
