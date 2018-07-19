@@ -6,31 +6,31 @@ Release:        0.4.%{candidate}%{?dist}
 Epoch:          1
 Summary:        EDA software suite for creation of schematic diagrams and PCBs
 
-Group:          Applications/Engineering
 License:        GPLv3+
 URL:            http://www.kicad-pcb.org
 
 # These are temporary until 5.0.0 is released.
-Source0:	https://launchpad.net/kicad/5.0/%{version}-%{candidate}/+download/kicad-%{version}-%{candidate}.tar.xz
-Source1:	https://github.com/KiCad/kicad-doc/archive/%{version}-%{candidate}.tar.gz#/kicad-doc-%{version}-%{candidate}.tar.gz
-Source2:	https://github.com/KiCad/kicad-i18n/archive/%{version}-%{candidate}.tar.gz#/kicad-i18n-%{version}-%{candidate}.tar.gz
-Source3:	https://github.com/KiCad/kicad-templates/archive/%{version}-%{candidate}.tar.gz#/kicad-templates-%{version}-%{candidate}.tar.gz
-Source4:	https://github.com/KiCad/kicad-symbols/archive/%{version}-%{candidate}.tar.gz#/kicad-symbols-%{version}-%{candidate}.tar.gz
-Source5:	https://github.com/KiCad/kicad-footprints/archive/%{version}-%{candidate}.tar.gz#/kicad-footprints-%{version}-%{candidate}.tar.gz
-Source6:	https://github.com/KiCad/kicad-packages3D/archive/%{version}-%{candidate}.tar.gz#/kicad-packages3D-%{version}-%{candidate}.tar.gz
+Source0:        https://launchpad.net/kicad/5.0/%{version}-%{candidate}/+download/kicad-%{version}-%{candidate}.tar.xz
+Source1:        https://github.com/KiCad/kicad-doc/archive/%{version}-%{candidate}.tar.gz#/kicad-doc-%{version}-%{candidate}.tar.gz
+Source2:        https://github.com/KiCad/kicad-i18n/archive/%{version}-%{candidate}.tar.gz#/kicad-i18n-%{version}-%{candidate}.tar.gz
+Source3:        https://github.com/KiCad/kicad-templates/archive/%{version}-%{candidate}.tar.gz#/kicad-templates-%{version}-%{candidate}.tar.gz
+Source4:        https://github.com/KiCad/kicad-symbols/archive/%{version}-%{candidate}.tar.gz#/kicad-symbols-%{version}-%{candidate}.tar.gz
+Source5:        https://github.com/KiCad/kicad-footprints/archive/%{version}-%{candidate}.tar.gz#/kicad-footprints-%{version}-%{candidate}.tar.gz
+Source6:        https://github.com/KiCad/kicad-packages3D/archive/%{version}-%{candidate}.tar.gz#/kicad-packages3D-%{version}-%{candidate}.tar.gz
 
-#Source0:	https://launchpad.net/kicad/5.0/%%{version}/+download/kicad-%%{version}.tar.xz
-#Source1:	https://github.com/KiCad/kicad-doc/archive/%%{version}.tar.gz#/kicad-doc-%%{version}.tar.gz
-#Source2:	https://github.com/KiCad/kicad-i18n/archive/%%{version}.tar.gz#/kicad-i18n-%%{version}.tar.gz
-#Source3:	https://github.com/KiCad/kicad-templates/archive/%%{version}.tar.gz#/kicad-templates-%%{version}.tar.gz
-#Source4:	https://github.com/KiCad/kicad-symbols/archive/%%{version}.tar.gz#/kicad-symbols-%%{version}.tar.gz
-#Source5:	https://github.com/KiCad/kicad-footprints/archive/%%{version}.tar.gz#/kicad-footprints-%%{version}.tar.gz
-#Source6:	https://github.com/KiCad/kicad-packages3D/archive/%%{version}.tar.gz#/kicad-packages3D-%%{version}.tar.gz
+#Source0:       https://launchpad.net/kicad/5.0/%%{version}/+download/kicad-%%{version}.tar.xz
+#Source1:       https://github.com/KiCad/kicad-doc/archive/%%{version}.tar.gz#/kicad-doc-%%{version}.tar.gz
+#Source2:       https://github.com/KiCad/kicad-i18n/archive/%%{version}.tar.gz#/kicad-i18n-%%{version}.tar.gz
+#Source3:       https://github.com/KiCad/kicad-templates/archive/%%{version}.tar.gz#/kicad-templates-%%{version}.tar.gz
+#Source4:       https://github.com/KiCad/kicad-symbols/archive/%%{version}.tar.gz#/kicad-symbols-%%{version}.tar.gz
+#Source5:       https://github.com/KiCad/kicad-footprints/archive/%%{version}.tar.gz#/kicad-footprints-%%{version}.tar.gz
+#Source6:       https://github.com/KiCad/kicad-packages3D/archive/%%{version}.tar.gz#/kicad-packages3D-%%{version}.tar.gz
 
+# https://bugzilla.redhat.com/show_bug.cgi?id=1076929
 Patch1:         kicad-5.0.0-nostrip.patch
 Patch2:         kicad-5.0.0-freerouting.patch
 
-# kicad is only available on the following architectures (see https://bugs.launchpad.net/kicad/+bug/1755752):
+# https://bugs.launchpad.net/kicad/+bug/1755752
 ExclusiveArch:  %{ix86} x86_64 %{arm} aarch64
 
 BuildRequires:  desktop-file-utils
@@ -46,7 +46,6 @@ BuildRequires:  swig
 BuildRequires:  glm-devel
 BuildRequires:  OCE-devel
 BuildRequires:  openssl-devel
-BuildRequires:  gcc
 BuildRequires:  gcc-c++
 
 # Documentation
@@ -152,9 +151,6 @@ mv kicad-packages3D-%{version}-%{candidate} kicad-packages3D-%{version}
     -DKICAD_VERSION_EXTRA=%{release} \
     -DwxWidgets_CONFIG_EXECUTABLE=%{_bindir}/%{wx_config} \
     .
-# workaround to get WXPYTHON_VERSION set in config.h
-%{__make} rebuild_cache
-# end workaround
 %make_build
 
 # Localization
@@ -184,7 +180,7 @@ pushd %{name}-footprints-%{version}/
 %make_build
 popd
 
-# 3D package libraries
+# 3D models
 pushd %{name}-packages3D-%{version}/
 %cmake .
 %make_build
@@ -205,6 +201,7 @@ popd
 
 # KiCad application
 %make_install
+%{__cp} -p AUTHORS.txt %{buildroot}%{_docdir}/%{name}/
 
 # Localization
 pushd %{name}-i18n-%{version}/build/
@@ -264,7 +261,7 @@ appstream-util validate-relax --nonet %{buildroot}/%{_datadir}/appdata/*.appdata
 %{_datadir}/mime/packages/*.xml
 
 %files doc
-%doc AUTHORS.txt
+%{_docdir}/%{name}/*.txt
 %{_docdir}/%{name}/help/*
 %{_docdir}/%{name}/scripts/*
 %license %{name}-doc-%{version}/LICENSE.adoc
